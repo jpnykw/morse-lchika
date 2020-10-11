@@ -45,6 +45,9 @@ def init():
   GPIO.setmode(GPIO.BCM)
   GPIO.setup(2, GPIO.OUT)
 
+def close():
+  GPIO.cleanup()
+
 def sig_s():
   GPIO.output(2, True)
   time.sleep(0.1)
@@ -63,7 +66,7 @@ def send():
       for j in xrange(len(code)):
         signal = code[j]
         sig_s() if signal == '.' else sig_l()
-        time.sleep(0.6)
+        time.sleep(0.3)
 
 # Start
 args = sys.argv
@@ -72,4 +75,4 @@ repeat = args[2]
 
 init()
 send()
-
+close()
